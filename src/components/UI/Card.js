@@ -1,4 +1,5 @@
 /** @format */
+import React from 'react';
 import './Card.css';
 const Cards = (props) => {
   const classes = 'card ' + props.className;
