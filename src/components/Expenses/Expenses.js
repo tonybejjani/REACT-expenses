@@ -5,17 +5,20 @@ import ExpensesFilter from './ExpensesFilter';
 import Card from '../UI/Card';
 import './Expenses.css';
 const Expenses = (props) => {
-  const [year, setYear] = useState('2020');
+  const [year, setYear] = useState('2019');
 
   const saveSelectedYear = (selectedYear) => {
     setYear(selectedYear);
   };
 
-  let listExpenses = props.items
-    .filter((item) => {
-      return Number(item.date.getFullYear()) === Number(year);
-    })
-    .map((expense) => (
+  let FilteredExpenses = props.items.filter((item) => {
+    return Number(item.date.getFullYear()) === Number(year);
+  });
+
+  let listExpenses = <p>No Expenses Found.</p>;
+
+  if (FilteredExpenses.length > 0) {
+    listExpenses = FilteredExpenses.map((expense) => (
       <ExpenseItem
         key={expense.id}
         title={expense.title}
@@ -23,8 +26,7 @@ const Expenses = (props) => {
         date={expense.date}
       />
     ));
-
-  console.log(listExpenses);
+  }
 
   return (
     <div className="expenses">
